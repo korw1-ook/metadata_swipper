@@ -1,0 +1,6 @@
+Flask
+gunicorn
+Pillow
+PyPDF2
+exifread
+python-magic

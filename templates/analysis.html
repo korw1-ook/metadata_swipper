@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata Analysis</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analysis.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="top">
+        <div class="brand">MetadataTotal</div>
+        <div class="subtitle">Metadata Risk Analysis Report</div>
+    </header>
+
+    <!-- RISK SUMMARY -->
+    <section class="risk-card">
+
+        <div class="risk-main">
+            <div class="risk-score"
+                 style="color:
+                 {% if exposure < 30 %}#22c55e
+                 {% elif exposure < 70 %}#f59e0b
+                 {% else %}#ef4444{% endif %}">
+                {{ exposure }}%
+            </div>
+
+            <div class="risk-desc">
+                {% if exposure < 30 %}
+                    Low risk — safe for internal sharing
+                {% elif exposure < 70 %}
+                    Medium risk — review before sharing
+                {% else %}
+                    High risk — public sharing not recommended
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="bar">
+            <span style="
+                width: {{ exposure }}%;
+                background:
+                {% if exposure < 30 %}#22c55e
+                {% elif exposure < 70 %}#f59e0b
+                {% else %}#ef4444{% endif %}
+            "></span>
+        </div>
+
+    </section>
+
+    <!-- METADATA -->
+    <section class="section">
+        <div class="section-title">Detected Metadata</div>
+
+        {% if metadata|length == 0 %}
+            <p class="empty">No sensitive metadata detected.</p>
+        {% endif %}
+
+        {% for m in metadata %}
+        <div class="meta">
+            <div class="meta-text">
+                <strong>{{ m.label }}</strong>
+                <span>{{ m.value }}</span>
+            </div>
+
+            <div class="tag {{ m.level|lower }}">
+                {{ m.level }}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- POLICY -->
+    <section class="section">
+
+        <div class="section-title">Sharing & Removal Policy</div>
+
+        <form action="/sanitize" method="POST">
+
+            <input type="hidden" name="temp_path" value="{{ temp_path }}">
+
+            <div class="radio-group">
+                <label><input type="radio" name="share" value="internal" checked> Internal sharing</label>
+                <label><input type="radio" name="share" value="external"> External sharing</label>
+                <label><input type="radio" name="share" value="public"> Public upload</label>
+            </div>
+
+            <div class="divider"></div>
+
+            <strong class="mode-title">Removal Mode</strong>
+
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="mode" value="auto" checked
+                           onclick="toggleManual(false)">
+                    Automatic (recommended)
+                </label>
+
+                <label>
+                    <input type="radio" name="mode" value="manual"
+                           onclick="toggleManual(true)">
+                    Manual (advanced)
+                </label>
+            </div>
+
+            <div id="manual-box" class="manual">
+
+                <label>
+                    <input type="checkbox" name="groups" value="EXIF" checked>
+                    Remove EXIF (GPS, camera, device)
+                </label>
+
+                <label>
+                    <input type="checkbox" name="groups" value="XMP" checked>
+                    Remove XMP (editing history)
+                </label>
+
+                <label>
+                    <input type="checkbox" name="groups" value="IPTC" checked>
+                    Remove IPTC (author & copyright)
+                </label>
+
+            </div>
+
+            <button class="primary">
+                Apply Policy & Download Clean File
+            </button>
+
+        </form>
+
+    </section>
+
+</div>
+
+<script>
+function toggleManual(show) {
+    document.getElementById("manual-box").style.display =
+        show ? "block" : "none";
+}
+</script>
+
+</body>
+</html>

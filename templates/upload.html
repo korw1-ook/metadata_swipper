@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetadataTotal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- LEFT CONTENT -->
+    <div class="left">
+
+        <div class="brand">MetadataTotal</div>
+
+        <h1>
+            Analyze hidden metadata<br>
+            before sharing files
+        </h1>
+
+        <p>
+            Images and documents may contain invisible information such as
+            GPS location, device details, author names, editing software,
+            and timestamps.
+        </p>
+
+        <div class="flow">
+            <div class="flow-step"><span>1</span> Upload</div>
+            <div class="flow-step"><span>2</span> Extract</div>
+            <div class="flow-step"><span>3</span> Analyze</div>
+            <div class="flow-step"><span>4</span> Report</div>
+        </div>
+
+        <div class="points">
+            <div>✔ GPS & location exposure</div>
+            <div>✔ Author & software tracking</div>
+            <div>✔ Safe metadata removal</div>
+            <div>✔ Local processing only</div>
+        </div>
+
+        <div class="trust-row">
+            <div class="trust-item">🔒 No storage</div>
+            <div class="trust-item">🧠 Local</div>
+            <div class="trust-item">🗑️ Auto delete</div>
+            <div class="trust-item">⚡ Fast</div>
+        </div>
+
+        <div class="examples">
+            <div class="ex-title">Common metadata leaks</div>
+            <div class="ex-grid">
+                <div>📍 GPS</div>
+                <div>📱 Device</div>
+                <div>🕒 Time</div>
+                <div>🧑 Author</div>
+                <div>🧩 Software</div>
+                <div>🗂️ History</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT CARD -->
+    <div class="right">
+        <div class="card">
+
+            <div class="badge">FILE ANALYSIS</div>
+
+            <form action="/analyze" method="POST" enctype="multipart/form-data">
+                <label class="upload">
+                    <input type="file" name="file" required>
+                    <span>Choose file to analyze</span>
+                </label>
+
+                <button type="submit">Analyze Metadata</button>
+            </form>
+
+            <div class="note">
+                JPG · PNG · PDF<br>
+                Files processed temporarily
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
