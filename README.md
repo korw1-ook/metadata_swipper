@@ -1,91 +1,92 @@
 # 🛡️ MetadataTotal  
-**Metadata Privacy & Exposure Analysis Tool**
+### Metadata Privacy & Exposure Analysis Platform
+
+> A cybersecurity-focused web tool for detecting hidden metadata risks and safely removing sensitive information without damaging file integrity.
 
 ---
 
-## Overview
-
-Modern files often contain **hidden metadata** that users are unaware of when sharing documents or images online.
-
-This metadata can silently expose:
-
-- GPS location
-- Device information
-- Author identity
-- Editing history
-- Software fingerprints
-
-**MetadataTotal** is a forensic-style web application built with Flask that detects and safely removes sensitive metadata while preserving file integrity.
-
-The project focuses on **privacy risk analysis**, not just metadata cleaning.
+<p align="center">
+  <b>Digital Forensics • Privacy Engineering • Metadata Analysis</b>
+</p>
 
 ---
 
-## Problem Statement
+## 🔍 Why Metadata Matters
 
-Most users assume that deleting visible content is enough before sharing a file.
+Files shared online often contain **invisible forensic data**.
 
-In reality, metadata can reveal:
+This hidden metadata can expose:
 
-- where a photo was taken  
-- which device was used  
-- who created or edited the file  
-- what software processed it  
+- 📍 Exact GPS coordinates  
+- 👤 Author identity  
+- 📷 Device and camera model  
+- 🧠 Editing software fingerprints  
+- 🕒 Creation and modification timelines  
 
-This information is frequently exploited during:
+These artifacts are commonly used in:
 
 - OSINT investigations  
-- digital profiling  
-- identity correlation  
-- social engineering reconnaissance  
+- Digital profiling  
+- Social engineering preparation  
+- Identity correlation attacks  
 
-MetadataTotal addresses this problem by providing **visibility, risk scoring, and safe sanitization**.
-
----
-
-## Key Capabilities
-
-### Metadata Detection
-- Forensic-grade metadata extraction using ExifTool (read-only)
-- EXIF, XMP, IPTC, and document metadata support
-- GPS coordinate identification
-- Author and creator attribution detection
-- Software and device fingerprint analysis
-
-### Exposure Risk Assessment
-- Severity-based classification:
-  - Low
-  - Medium
-  - Critical
-- Exposure percentage calculation
-- Visual risk representation
-
-### Safe Metadata Removal
-- No destructive overwriting
-- No EXIF tampering
-- File rebuilt cleanly
-- Maintains original image or document integrity
-
-### Privacy-Focused Workflow
-- Temporary file processing only
-- No permanent storage
-- No third-party services
-- Local execution supported
+**MetadataTotal** makes these risks visible — before the file is shared.
 
 ---
 
-## Architecture Flow
+## ⚙️ What MetadataTotal Does
+
+✔ Detects real metadata using forensic-grade tools  
+✔ Classifies exposure severity  
+✔ Calculates privacy risk score  
+✔ Safely removes sensitive metadata  
+✔ Preserves file integrity  
+✔ Works completely offline  
+
+No cloud.  
+No tracking.  
+No destructive modification.
+
+---
+
+## 🧠 Core Features
+
+### 🔎 Metadata Detection
+- EXIF, XMP, IPTC analysis
+- GPS coordinate extraction
+- Author & creator discovery
+- Software and device fingerprint detection
+- Read-only forensic scanning
+
+### 🚨 Exposure Risk Engine
+- Severity classification:
+  - **Low** – harmless data
+  - **Medium** – identity indicators
+  - **Critical** – location & tracking risk
+- Visual exposure percentage
+- Sharing safety guidance
+
+### 🧼 Safe Sanitization
+- No file corruption
+- No EXIF rewriting
+- Rebuild-based cleaning
+- Output remains visually identical
+- Compatible with forensic-safe workflows
+
+---
+
+## 🧩 Architecture Flow
 
 ```
-User Upload
+Upload File
      ↓
 Metadata Extraction (ExifTool - Read Only)
      ↓
-Risk Classification Engine
+Forensic Classification Engine
      ↓
-Exposure Score Calculation
+Exposure Risk Calculation
      ↓
-User Sharing Policy Selection
+Sharing Context Selection
      ↓
 Safe File Rebuild
      ↓
@@ -94,10 +95,10 @@ Clean File Download
 
 ---
 
-## Supported File Types
+## 📂 Supported File Types
 
-| File Type | Detection | Safe Cleaning |
-|----------|------------|----------------|
+| File Type | Metadata Detection | Safe Cleaning |
+|----------|--------------------|----------------|
 | JPG | ✅ | ✅ |
 | JPEG | ✅ | ✅ |
 | PNG | ✅ | ✅ |
@@ -105,23 +106,22 @@ Clean File Download
 
 ---
 
-## Technology Stack
+## 🧰 Technology Stack
 
 | Layer | Technology |
 |------|-------------|
-| Backend | Python, Flask |
+| Backend | Python · Flask |
 | Metadata Engine | ExifTool |
 | Image Processing | Pillow |
-| PDF Processing | PyPDF2 |
-| Frontend | HTML, CSS, JavaScript |
-| Platform | Cross-platform (Windows / Linux) |
+| PDF Handling | PyPDF2 |
+| Frontend | HTML · CSS · JavaScript |
+| Platform | Windows / Linux |
 
 ---
 
-## Installation
+## 🚀 Installation
 
-### 1. Clone the repository
-
+### 1️⃣ Clone repository
 ```bash
 git clone https://github.com/yourusername/MetadataTotal.git
 cd MetadataTotal
@@ -129,92 +129,93 @@ cd MetadataTotal
 
 ---
 
-### 2. Install dependencies
-
+### 2️⃣ Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-### 3. Install ExifTool
+### 3️⃣ Install ExifTool
 
 Download from:
 
 https://exiftool.org
 
 Rename:
-
 ```
 exiftool(-k).exe → exiftool.exe
 ```
 
-Place it either:
-
-- in the project root  
-- or in your system PATH  
+Place it in:
+- project root **or**
+- system PATH
 
 ---
 
-### 4. Run the application
-
+### 4️⃣ Run the server
 ```bash
 python app.py
 ```
 
-Access in browser:
-
+Open:
 ```
 http://127.0.0.1:5000
 ```
 
 ---
 
-## Privacy & Security Design
+## 🔐 Privacy & Security Principles
 
-- Files processed in temporary directories
-- No metadata stored permanently
+- Temporary file handling only
+- No permanent storage
 - No cloud uploads
-- No external APIs
-- No user tracking
+- No third-party APIs
+- Local-first processing
+- Designed for privacy research
 
-The tool is intentionally designed to minimize data exposure during analysis.
-
----
-
-## Disclaimer
-
-This project is intended for:
-
-- cybersecurity education
-- privacy awareness
-- forensic learning
-- defensive research
-
-It must not be used for illegal surveillance, unauthorized investigation, or privacy violation.
+This project intentionally follows **defensive security design**.
 
 ---
 
-## Learning Value
+## 🎓 Learning Value
 
-This project demonstrates practical understanding of:
+This project demonstrates understanding of:
 
-- metadata forensics
-- privacy threat modeling
-- OSINT exposure analysis
-- secure file handling
-- safe sanitization techniques
+- Metadata forensics
+- Privacy threat modeling
+- OSINT exposure risks
+- Secure file handling
+- Non-destructive sanitization
 - Flask backend architecture
-- cybersecurity-oriented UI design
+- Cybersecurity-focused UI logic
 
 ---
 
-## Author
+## ⚠️ Disclaimer
+
+This tool is intended strictly for:
+
+- cybersecurity education  
+- digital forensics learning  
+- privacy awareness  
+- defensive research  
+
+Misuse for surveillance, unauthorized tracking, or privacy invasion is not permitted.
+
+---
+
+## 👤 Author
 
 **Korounganba**  
 Cybersecurity Student  
-Focus Areas:  
-Privacy Engineering · Digital Forensics · Security Analysis
+
+Focus Areas:
+- Privacy Engineering  
+- Digital Forensics  
+- OSINT Risk Analysis  
+- Defensive Security  
 
 ---
+
 
