@@ -154,7 +154,7 @@ This guarantees:
 Designed for Linux environments and suitable for VPS deployment.
 
 ```bash
-git clone https://github.com/korw1-ook/MetadataTotal.git
+git clone https://github.com/korw1-ook/metadata_swipper.git
 cd MetadataTotal
 
 python3 -m venv myenv
