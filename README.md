@@ -1,179 +1,220 @@
-# 🛡️ MetadataTotal — Metadata Privacy & Exposure Analyzer
-
-Detect. Assess. Sanitize.  
-A privacy-focused metadata analysis and protection web application.
+# 🛡️ MetadataTotal  
+**Metadata Privacy & Exposure Analysis Tool**
 
 ---
 
 ## Overview
 
-MetadataTotal is a Flask-based web application designed to detect and safely remove hidden metadata from images and documents before sharing them online.
+Modern files often contain **hidden metadata** that users are unaware of when sharing documents or images online.
 
-Digital files often contain invisible information such as GPS location, device details, author identity, editing software fingerprints, and timestamps.  
-This tool helps users identify privacy risks and generate clean, metadata-free files without corruption.
+This metadata can silently expose:
 
----
+- GPS location
+- Device information
+- Author identity
+- Editing history
+- Software fingerprints
 
-## What This Tool Detects
+**MetadataTotal** is a forensic-style web application built with Flask that detects and safely removes sensitive metadata while preserving file integrity.
 
-- GPS coordinates and location data  
-- Author and creator identity  
-- Editing software fingerprints  
-- Camera and device information  
-- Embedded PDF document metadata  
-
-Each detected field is evaluated to determine privacy exposure severity.
+The project focuses on **privacy risk analysis**, not just metadata cleaning.
 
 ---
 
-## Features
+## Problem Statement
 
-- Metadata detection using ExifTool (read-only)
-- Exposure risk scoring (Low / Medium / Critical)
-- Visual exposure percentage
-- Safe metadata removal
-- File reconstruction without corruption
-- Supports JPG, JPEG, PNG, and PDF
-- Temporary file handling only
-- Clean and responsive user interface
+Most users assume that deleting visible content is enough before sharing a file.
+
+In reality, metadata can reveal:
+
+- where a photo was taken  
+- which device was used  
+- who created or edited the file  
+- what software processed it  
+
+This information is frequently exploited during:
+
+- OSINT investigations  
+- digital profiling  
+- identity correlation  
+- social engineering reconnaissance  
+
+MetadataTotal addresses this problem by providing **visibility, risk scoring, and safe sanitization**.
+
+---
+
+## Key Capabilities
+
+### Metadata Detection
+- Forensic-grade metadata extraction using ExifTool (read-only)
+- EXIF, XMP, IPTC, and document metadata support
+- GPS coordinate identification
+- Author and creator attribution detection
+- Software and device fingerprint analysis
+
+### Exposure Risk Assessment
+- Severity-based classification:
+  - Low
+  - Medium
+  - Critical
+- Exposure percentage calculation
+- Visual risk representation
+
+### Safe Metadata Removal
+- No destructive overwriting
+- No EXIF tampering
+- File rebuilt cleanly
+- Maintains original image or document integrity
+
+### Privacy-Focused Workflow
+- Temporary file processing only
+- No permanent storage
+- No third-party services
+- Local execution supported
+
+---
+
+## Architecture Flow
+
+```
+User Upload
+     ↓
+Metadata Extraction (ExifTool - Read Only)
+     ↓
+Risk Classification Engine
+     ↓
+Exposure Score Calculation
+     ↓
+User Sharing Policy Selection
+     ↓
+Safe File Rebuild
+     ↓
+Clean File Download
+```
 
 ---
 
 ## Supported File Types
 
-| File Type | Detection | Cleaning |
-|---------|-----------|----------|
-| JPG | Yes | Yes |
-| JPEG | Yes | Yes |
-| PNG | Yes | Yes |
-| PDF | Yes | Yes |
-
----
-
-## Why MetadataTotal
-
-Most metadata cleaners directly modify file structures, often resulting in corrupted images or broken PDF documents.
-
-MetadataTotal follows a safer design:
-
-- Metadata extraction is read-only
-- Original content is rebuilt cleanly
-- File integrity and quality are preserved
-
-This approach reflects real-world privacy and digital forensic workflows.
-
----
-
-## Application Flow
-
-Browser  
-↓  
-Flask Web Application  
-↓  
-ExifTool Metadata Analysis  
-↓  
-Risk Scoring Engine  
-↓  
-Safe File Rebuild  
-↓  
-Sanitized Download  
+| File Type | Detection | Safe Cleaning |
+|----------|------------|----------------|
+| JPG | ✅ | ✅ |
+| JPEG | ✅ | ✅ |
+| PNG | ✅ | ✅ |
+| PDF | ✅ | ✅ |
 
 ---
 
 ## Technology Stack
 
-- Python 3
-- Flask
-- ExifTool
-- Pillow
-- PyPDF2
-- HTML / CSS
+| Layer | Technology |
+|------|-------------|
+| Backend | Python, Flask |
+| Metadata Engine | ExifTool |
+| Image Processing | Pillow |
+| PDF Processing | PyPDF2 |
+| Frontend | HTML, CSS, JavaScript |
+| Platform | Cross-platform (Windows / Linux) |
 
 ---
 
-## Project Structure
+## Installation
 
-MetadataTotal  
-├── server.py  
-├── templates  
-│   ├── upload.html  
-│   └── analysis.html  
-├── static  
-│   └── css  
-│       ├── upload.css  
-│       └── analysis.css  
-├── requirements.txt  
-└── README.md  
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/MetadataTotal.git
+cd MetadataTotal
+```
 
 ---
 
-## Installation (Linux Recommended)
+### 2. Install dependencies
 
-Clone the repository:
+```bash
+pip install -r requirements.txt
+```
 
-git clone https://github.com/yourusername/MetadataTotal.git  
-cd MetadataTotal  
+---
 
-Create virtual environment:
+### 3. Install ExifTool
 
-python3 -m venv myenv  
-source myenv/bin/activate  
+Download from:
 
-Install dependencies:
+https://exiftool.org
 
-pip install -r requirements.txt  
+Rename:
 
-Install ExifTool:
+```
+exiftool(-k).exe → exiftool.exe
+```
 
-sudo apt install exiftool -y  
+Place it either:
 
-Run the application:
+- in the project root  
+- or in your system PATH  
 
-python server.py  
+---
 
-Open in browser:
+### 4. Run the application
 
+```bash
+python app.py
+```
+
+Access in browser:
+
+```
 http://127.0.0.1:5000
+```
 
 ---
 
-## Deployment
+## Privacy & Security Design
 
-Designed for Linux-based hosting.
+- Files processed in temporary directories
+- No metadata stored permanently
+- No cloud uploads
+- No external APIs
+- No user tracking
 
-Recommended platform: Render
-
-Build command:
-
-apt-get update && apt-get install -y exiftool && pip install -r requirements.txt
-
-Start command:
-
-gunicorn server:app
-
----
-
-## Privacy & Security
-
-- Files processed temporarily
-- No permanent storage
-- No third-party APIs
-- Privacy-first design
+The tool is intentionally designed to minimize data exposure during analysis.
 
 ---
 
 ## Disclaimer
 
-This project is intended for educational and privacy-awareness purposes only.  
-Do not use this tool for unauthorized or illegal activities.
+This project is intended for:
+
+- cybersecurity education
+- privacy awareness
+- forensic learning
+- defensive research
+
+It must not be used for illegal surveillance, unauthorized investigation, or privacy violation.
+
+---
+
+## Learning Value
+
+This project demonstrates practical understanding of:
+
+- metadata forensics
+- privacy threat modeling
+- OSINT exposure analysis
+- secure file handling
+- safe sanitization techniques
+- Flask backend architecture
+- cybersecurity-oriented UI design
 
 ---
 
 ## Author
 
-Korounganba  
+**Korounganba**  
 Cybersecurity Student  
-Focus: Privacy • Digital Forensics
+Focus Areas:  
+Privacy Engineering · Digital Forensics · Security Analysis
 
 ---
 
