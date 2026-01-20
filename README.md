@@ -69,19 +69,14 @@ Each detected field is analyzed to determine potential privacy exposure.
 
 ## ⚠️ Why MetadataTotal Is Different
 
-Many metadata cleaners directly strip internal file structures, which often results in:
-
-- corrupted images  
-- broken PDF files  
-- unreadable documents  
+Many metadata cleaners directly strip internal file structures, which often results in corrupted images or broken documents.
 
 MetadataTotal follows a **safe rebuild methodology**:
-
 - Metadata is extracted in read-only mode
 - Original content is reconstructed cleanly
 - File structure and integrity remain intact
 
-This approach mirrors professional privacy and digital forensic workflows.
+This approach reflects professional privacy and digital forensic workflows.
 
 ---
 
